@@ -320,6 +320,71 @@ $(document).on('click', '.alm', function(event) {
 
 $(document).on('click', '.move', function(event) {
 
-	alert(this.id);
+	$(".module-head").empty();
+	$(".module-head").append('<h3>Cambio de almacen</h3>');
+
+	$(".module-body").empty();
+	$(".module-body").append('<form class="form-horizontal row-fluid">'+
+							 	'<div class="control-group ">'+
+									'<label class="control-label">No. Inventario</label>'+
+										'<div class="controls col-md-3">'+
+											'<div class="input-append">'+
+												'<input type="text" placeholder="NI-00006138"  >'+
+												'<input type="submit" class="btn btn-default" value="Buscar" />'+
+											'</div>'+
+										'</div>'+
+
+									'<br>'+
+									'<label class="control-label">Serie</label>'+
+										'<div class="controls col-md-3">'+
+											
+											'<input type="text"  disabled="true" >'+
+										'</div>'+
+
+									'<br>'+
+									'<label class="control-label">Articulo</label>'+
+										'<div class="controls col-md-3">'+
+											'<input type="text" disabled="true" >'+
+										'</div>'+
+
+									'<br>'+
+									'<label class="control-label">Descripcion</label>'+
+										'<div class="controls col-md-3">'+
+											'<input type="text" >'+
+										'</div>'+
+
+									'<br>'+
+									'<label class="control-label">Ubicacion Actual</label>'+
+										'<div class="controls col-md-3">'+
+											'<select tabindex="1" class="col-md-3">'+
+												'<option value="">Selecciona uno..</option>'+
+												'<option value="Category 1">First Row</option>'+
+											'</select>'+
+										'</div>'+
+
+									
+									'<br>'+
+									'<label class="control-label">Nueva Ubicacion</label>'+
+										'<div class="controls col-md-3">'+
+											'<select tabindex="1" class="col-md-3">'+
+												'<option value="">Selecciona uno..</option>'+
+												'<option value="Category 1">First Row</option>'+
+											'</select>'+
+										'</div>'+
+
+									'<br>'+
+									'<br>'+
+									'<label class="control-label"></label>'+
+										'<div class="controls col-md-3">'+
+											'<input type="submit" class="btn btn-default" value="Buscar" />'+
+										'</div>'+
+
+									'&nbsp'+
+									'<label class="control-label"></label>'+
+										'<div class="controls col-md-3">'+
+											'<input type="submit" class="btn btn-default" value="Limpiar" />'+
+										'</div>'+	
+								'</div>'+
+							 '</form>');
 
 });

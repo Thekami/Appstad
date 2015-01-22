@@ -17,9 +17,9 @@ AppstadAlmacen
                         Equipo 
                     </a>
                     <ul id="MenuAltas" class="collapse unstyled">
-                        <li><a href="#"><i class="icon-inbox"></i>Altas </a></li>
-                        <li><a href="#"><i class="icon-inbox"></i>Cambio de Almacen </a></li>
-                        <li><a href="#"><i class="icon-inbox"></i>Historial de Cambios </a></li>
+                        <li><a href="#" class="">Altas </a></li>
+                        <li><a href="#" class="move">Cambio de Almacen </a></li>
+                        <li><a href="#" class="">Historial de Cambios </a></li>
                     </ul>
                 </li>
                  
@@ -50,23 +50,20 @@ AppstadAlmacen
                     </a>
                     <ul id="MenuMsg" class="collapse unstyled">
                         <li>
-                            <a href="#">
-                                <i class="icon-inbox"></i>
+                            <a href="#" class="">
                                 Leer 
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="icon-inbox"></i>
+                            <a href="#" class="">
                                 Redactar
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="menu-icon icon-signout"></i>
-                        Cerrar Sesion 
+                    <a href="#" ><i class="menu-icon icon-signout"></i>
+                        Cerrar Sesion
                     </a>
                 </li>
             </ul>
@@ -76,12 +73,12 @@ AppstadAlmacen
 	<div class="span9">
 		<div class="module">
             <div class="module-head">
-                {{Form::open(array('method' => 'POST', 'class'=>'input-append'))}}
+                {{Form::open(array("method" => "POST", "class"=>"input-append"))}}
                 {{ Form::text('username','',  array('placeholder'=>'Buscar', 'id'=>'findTxt')) }}
                 {{Form::submit('Go', array('class' => 'btn btn-default','id'=>'findBtn' ))}}
                 {{form::close()}}
             </div>
-            <div class="module-body table">
+            <div class="module-body">
                 <table class="table  table-striped table-condensed table-bordered">
                     <thead>
                         <tr>
