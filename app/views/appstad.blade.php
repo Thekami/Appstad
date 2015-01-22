@@ -33,10 +33,8 @@ AppstadAlmacen
                     <ul id="MenuAlmacenes" class="collapse unstyled">
                         <li>
                             @foreach($almacen as $almacenes)
-                                <a href="#" id = "{{$almacenes['almacen']}}">
-                                <i></i>
-                                {{$almacenes['nombre']}}
-                                </a>
+                                <a href="#" class="alm" id = "{{$almacenes['id_clave']}}">
+                                <i>{{$almacenes['descrip']}}</i>                                </a>
                             @endforeach
                             
                         </li>
@@ -84,8 +82,7 @@ AppstadAlmacen
                 {{form::close()}}
             </div>
             <div class="module-body table">
-                <table class="table  table-striped table-condensed"
-                    width="100%">
+                <table class="table  table-striped table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th>No. Inventerio</th>
@@ -95,6 +92,7 @@ AppstadAlmacen
                             <th>Grupo</th>
                             <th>Id Localizacion</th>
                             <th>Localizacion</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody id="DatosExistencias">

@@ -1,19 +1,22 @@
+var num = 1;
+var limiteLinks = 11;
+var inicioLinks = 1;
+var finPAgs = 0;
+var identificador = "";
+var id = 0;
+
+
 $(document).ready(function(){
-	var num = 1;
-	var limiteLinks = 11;
-	var inicioLinks = 1;
-	var finPAgs = 0;
 
 	$.ajax({
 		url:'ajax/llenar-tabla',
 		type:'get',
 		datatype:'json',
-		data: {num, num:1},
+		data: {num:0, identificador:"todo"},
 		success:function(data){
 			var datos = eval('(' + data + ')');
-			finPAgs = datos[20]["Npags"];
+			finPAgs = datos[10]["Npags"];
 			finPAgs = finPAgs + 1;
-
 			for (var i = 0; i < datos.length-1; i++) {
 				$("#DatosExistencias").append('<tr>'+
 												'<td>'+datos[i].no_invent+'</td>'+
@@ -23,6 +26,16 @@ $(document).ready(function(){
 												'<td>'+datos[i].grupo+'</td>'+
 												'<td>'+datos[i].id_loc+'</td>'+
 												'<td>'+datos[i].localiza+'</td>'+
+												'<td>'+
+													'<div class="btn-group">'+
+														'<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+
+														'<span class="icon-cog"> Opciones </span></a>'+
+															'<ul class="dropdown-menu">'+
+																'<li><a href="#" id="'+datos[i].id+'" class="move">Mover</a></li>'+
+																'<li><a href="#" id="'+datos[i].id+'" class="delete">Eliminar</a></li>'+
+															'</ul>'+
+													'</div>'+
+												'</td>'+
 											  '</tr>');
 			};	
 
@@ -31,7 +44,7 @@ $(document).ready(function(){
 			};	
 			$("#paginacion").append('&nbsp;<a href="#" class="links" id="siguiente">'+'Siguiente'+'</a>&nbsp;');
 			$("#paginacion").append('<a href="#" class="links" id="ultimo">'+'>>'+'</a>');	
-
+			identificador = "todo";
 		}
 
 	});
@@ -47,12 +60,12 @@ $(document).ready(function(){
 		var response = paginar(pags, limiteLinks, inicioLinks, finPAgs);
 		limiteLinks = response[0];
 		inicioLinks = response[1];
-		
+
 		$.ajax({
 			url:'ajax/llenar-tabla',
 			type:'get',
 			datatype:'json',
-			data: {num, num:pags},
+			data: {id:id, num:pags, identificador:identificador},
 			success:function(data){
 				var datos = eval('(' + data + ')');
 				$("#DatosExistencias").empty();
@@ -65,6 +78,16 @@ $(document).ready(function(){
 													'<td>'+datos[i].grupo+'</td>'+
 													'<td>'+datos[i].id_loc+'</td>'+
 													'<td>'+datos[i].localiza+'</td>'+
+													'<td>'+
+														'<div class="btn-group">'+
+															'<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+
+															'<span class="icon-cog"> Opciones </span></a>'+
+																'<ul class="dropdown-menu">'+
+																	'<li><a href="#" id="'+datos[i].id+'" class="move">Mover</a></li>'+
+																	'<li><a href="#" id="'+datos[i].id+'" class="delete">Eliminar</a></li>'+
+																'</ul>'+
+														'</div>'+
+													'</td>'+
 												  '</tr>');
 				};	
 
@@ -103,6 +126,16 @@ $(document).ready(function(){
 														'<td>'+datos[i].grupo+'</td>'+
 														'<td>'+datos[i].id_loc+'</td>'+
 														'<td>'+datos[i].localiza+'</td>'+
+														'<td>'+
+															'<div class="btn-group">'+
+																'<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+
+																'<span class="icon-cog"> Opciones </span></a>'+
+																	'<ul class="dropdown-menu">'+
+																		'<li><a href="#" id="'+datos[i].id+'" class="move">Mover</a></li>'+
+																		'<li><a href="#" id="'+datos[i].id+'" class="delete">Eliminar</a></li>'+
+																	'</ul>'+
+															'</div>'+
+														'</td>'+
 													  '</tr>');
 					};
 				}
@@ -224,3 +257,69 @@ function paginar (pags, limiteLinks, inicioLinks, finPAgs) {
 		return response;
 }
 
+
+$(document).on('click', '.alm', function(event) {
+	id = this.id;
+
+	$.ajax({
+			url:'ajax/llenar-tabla',
+			type:'get',
+			datatype:'json',
+			data: {id:id, num:0, identificador:"almacenes"},
+			success:function(data){
+				//console.log(data);
+
+				var datos = eval('(' + data + ')');
+
+				finPAgs = datos[10]["Npags"];
+				finPAgs = finPAgs + 1;
+				limiteLinks = finPAgs;
+
+				if(datos[0].no_hay == "No se encontraron registros"){
+					alert(datos[0].no_hay);
+				}else{
+					$("#DatosExistencias").empty();
+					for (var i = 0; i < datos.length-1; i++) {
+						$("#DatosExistencias").append('<tr>'+
+														'<td>'+datos[i].no_invent+'</td>'+
+														'<td>'+datos[i].serie+'</td>'+
+														'<td>'+datos[i].nombre+'</td>'+
+														'<td>'+datos[i].articulo+'</td>'+
+														'<td>'+datos[i].grupo+'</td>'+
+														'<td>'+datos[i].id_loc+'</td>'+
+														'<td>'+datos[i].localiza+'</td>'+
+														'<td>'+
+															'<div class="btn-group">'+
+																'<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+
+																'<span class="icon-cog"> Opciones </span></a>'+
+																	'<ul class="dropdown-menu">'+
+																		'<li><a href="#" id="'+datos[i].id+'" class="move">Mover</a></li>'+
+																		'<li><a href="#" id="'+datos[i].id+'" class="delete">Eliminar</a></li>'+
+																	'</ul>'+
+															'</div>'+
+														'</td>'+
+													  '</tr>');
+					};
+					$("#paginacion").empty();
+					for (var i = inicioLinks; i < limiteLinks; i++) {
+						$("#paginacion").append('<a href="#" class="links" >'+i+'</a>&nbsp;');
+					};	
+					if (limiteLinks > 10) {
+					$("#paginacion").append('&nbsp;<a href="#" class="links" id="siguiente">'+'Siguiente'+'</a>&nbsp;');
+					$("#paginacion").append('<a href="#" class="links" id="ultimo">'+'>>'+'</a>');
+					};
+					identificador = "almacenes";
+				}
+					
+
+			}
+		});
+
+});
+
+
+$(document).on('click', '.move', function(event) {
+
+	alert(this.id);
+
+});

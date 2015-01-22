@@ -20,32 +20,55 @@ Class AjaxController extends BaseController {
 
     public function get_llenar_tabla(){
 
+        $identificador = Input::get('identificador');
+        $id = Input::get('id');
         $num = Input::get('num');
 
-        $count = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
-                                    "id_loc", "localiza")->count();
-        $Npags = $count/20;
-        $Npags = round($Npags);
-        $Npags = $Npags + 1;
-        $Npags = array('Npags' => $Npags);
+
+        if ($identificador == "todo") {
+
+            $count = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
+                                        "id_loc", "localiza", "id")->count();
+            $Npags = $count/10;
+            $Npags = round($Npags);
+            $Npags = $Npags + 1;
+            $Npags = array('Npags' => $Npags);
 
 
-       $consulta = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
-                                    "id_loc", "localiza")->take(20)->skip($num)->get();
+           $consulta = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
+                                        "id_loc", "localiza", "id")->take(10)->skip($num)->get();
 
-       //consulta equivalente a SELECT no_invent... FROM existencias LIMIT 20 OFFSET 1;
-       //toma 20 registros comenzando desde el primero.
+           //consulta equivalente a SELECT no_invent... FROM existencias LIMIT 20 OFFSET 1;
+           //toma 20 registros comenzando desde el primero.
+        }
 
+        if ($identificador == "almacenes") {
+            $count = Existencias::where('id_loc','=',$id)->count();
+
+            $Npags = $count/10;
+            $Npags = round($Npags);
+            $Npags = $Npags + 1;
+            $Npags = array('Npags' => $Npags);
+
+            $consulta = Existencias::where('id_loc','=',$id)->take(10)->skip($num)
+                                    ->get(array("no_invent", "serie", "nombre", "articulo", 
+                                                "grupo", "id_loc", "localiza", "id"));
+        }
+
+        //echo $count;
+        if ($consulta == "[]") {
+
+            $data[]=array('no_hay'=>"No se encontraron registros");
+
+        }else{
 
         foreach ($consulta as $campo) { 
             $data[]=array('no_invent'=>$campo["no_invent"],'serie'=>$campo["serie"],
             'nombre'=>$campo["nombre"],'articulo'=>$campo["articulo"],
             'grupo'=>$campo["grupo"],'id_loc'=>$campo["id_loc"],
-            'localiza'=>$campo["localiza"]);}
-
-
-    
-
+            'localiza'=>$campo["localiza"], 'id' =>$campo["id"]);}
+        }
+        
         array_push($data, $Npags);
 
         echo json_encode($data);
@@ -61,7 +84,6 @@ Class AjaxController extends BaseController {
                                ->orWhere('nombre','=',$val)
                                ->orWhere('articulo','=',$val)
                                ->orWhere('grupo','=',$val)
-                               ->orWhere('id_loc','=',$val)
                                ->orWhere('localiza','=',$val)
                                ->get(array("no_invent", "serie", "nombre", "articulo", 
                                                 "grupo", "id_loc", "localiza"));
@@ -79,6 +101,24 @@ Class AjaxController extends BaseController {
         }
         echo json_encode($data);
     }
+
+    /*public function get_almacenes(){
+        $id = Input::get('id');
+        $num = Input::get('num');
+
+
+        $count = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
+                                    "id_loc", "localiza")->count();
+        $Npags = $count/20;
+        $Npags = round($Npags);
+        $Npags = $Npags + 1;
+        $Npags = array('Npags' => $Npags);
+
+        $consulta = Existencias::where('id_loc','=',$id)
+                                ->take(20)->skip($num)
+                                ->get(array("no_invent", "serie", "nombre", "articulo", 
+                                                "grupo", "id_loc", "localiza"));
+    }*/
 
 }
 

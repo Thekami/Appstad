@@ -19,11 +19,12 @@ Route::get('/', function()
 });
 
 
+
 //Ruta para login ----------------------------------------------------------------------------------------
 
 //Página oculta donde sólo puede ingresar un usuario identificado
 Route::get('/appstad', ['before' => 'auth', function(){
-    return View::make('appstad')->with('almacen', Almacenes::select('almacen', 'nombre')->get());
+    return View::make('appstad')->with('almacen', Kioskosbcs::select('id_clave', 'descrip')->get());
 }]);
 //Procesa el formulario e identifica al usuario
 //Route::post('/login', ['uses' => 'AuthController@doLogin', 'before' => 'guest']);
