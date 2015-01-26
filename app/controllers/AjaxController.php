@@ -92,33 +92,69 @@ Class AjaxController extends BaseController {
             $data[]=array('no_hay'=>"No se encontraron registros");
         }else{
             foreach ($consulta as $campo) { 
-            $data[]=array('no_invent'=>$campo["no_invent"],'serie'=>$campo["serie"],
-            'nombre'=>$campo["nombre"],'articulo'=>$campo["articulo"],
-            'grupo'=>$campo["grupo"],'id_loc'=>$campo["id_loc"],
-            'localiza'=>$campo["localiza"]);}
+                $data[]=array('no_invent'=>$campo["no_invent"],'serie'=>$campo["serie"],
+                'nombre'=>$campo["nombre"],'articulo'=>$campo["articulo"],
+                'grupo'=>$campo["grupo"],'id_loc'=>$campo["id_loc"],
+                'localiza'=>$campo["localiza"]);
+            }
             
             
         }
         echo json_encode($data);
     }
 
-    /*public function get_almacenes(){
+    public function post_cambiar_almacen(){
         $id = Input::get('id');
-        $num = Input::get('num');
+        //$almacen = ['almacen'=>"..."];
+
+        if ($id != "solo-dom") {
+
+            $datos = Existencias::find($id);
+            $info = array('no_invent'=>$datos['no_invent'], 'serie'=>$datos['serie'],
+                'articulo'=>$datos['articulo'], 'nombre'=>$datos['nombre'], 
+                'localiza'=>$datos['localiza'], 'id_loc'=>$datos['id_loc'], 'id'=>$id);
+            
+        }else{
+
+            $info = array('no_invent'=>"", 'serie'=>"", 'articulo'=>"", 
+                          'nombre'=>"", 'localiza'=>"", 'id_loc'=>"", 'id'=>$id);
+
+        }   
+
+        $almacenes = Kioskosbcs::select('id_clave', 'descrip', 'modulo')->get();
+
+        foreach ($almacenes as $campo) { 
+            $almacen[]=array('id_clave'=>$campo["id_clave"],
+                             'descrip'=>$campo["descrip"], 
+                             'modulo'=>$campo["modulo"]);
+        }
+
+        array_push($info, $almacen);
+        echo json_encode($info);
+        //echo $almacenes;
+
+    }
+
+    public function post_guardar_cambio_almacen(){
+        
+        $id = Input::get('id');
+        $id_loc = Input::get('id_loc');
+        $modulo = Input::get('modulo');
 
 
-        $count = Existencias::select("no_invent", "serie", "nombre", "articulo", "grupo", 
-                                    "id_loc", "localiza")->count();
-        $Npags = $count/20;
-        $Npags = round($Npags);
-        $Npags = $Npags + 1;
-        $Npags = array('Npags' => $Npags);
+        $almacen2 = Kioskosbcs::select('descrip')
+                              ->where(array('id_clave'=>$id_loc, 'modulo'=>$modulo))
+                              ->get();
 
-        $consulta = Existencias::where('id_loc','=',$id)
-                                ->take(20)->skip($num)
-                                ->get(array("no_invent", "serie", "nombre", "articulo", 
-                                                "grupo", "id_loc", "localiza"));
-    }*/
+        
+        $edit = Existencias::find($id);
+        $edit->localiza = $almacen2[0]["descrip"];
+        $edit->id_loc = $id_loc;
+        $edit->save();
+
+        echo "Cambio de almacen Exitoso!";
+
+    }
 
 }
 

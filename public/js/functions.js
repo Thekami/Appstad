@@ -317,74 +317,117 @@ $(document).on('click', '.alm', function(event) {
 
 });
 
+$(document).on('click', '#guardar-cambo-almacen', function(event){
 
+	var id = $('.control-group').attr('id');
+	var id_loc = $('#almacen-destino').val();
+	var modulo = parseInt($('almacen-destino').attr('name'));
+
+
+
+	$.ajax({
+		url:'ajax/guardar-cambio-almacen',
+		type:'post',
+		datatype:'json',
+		data:{id:id, id_loc:id_loc, modulo:modulo},
+		success:function(data){
+			$(".msg").append('<div class="alert alert-success">'+
+								    '<button type="button" class="close" data-dismiss="alert">×'+
+							        '</button>'+
+							        '<strong>'+data+'</strong>'+ 
+						     '</div>');
+		}
+	});
+
+	//console.log("" +no_invent+ " -- " +serie+ " -- " +articulo+ " -- " +nombre+ " -- " +almacen1+"");
+
+});
 $(document).on('click', '.move', function(event) {
+	var id = this.id;
 
-	$(".module-head").empty();
-	$(".module-head").append('<h3>Cambio de almacen</h3>');
+		$.ajax({
+			url:'ajax/cambiar-almacen',
+			type:'post',
+			datatype:'json',
+			data: {id:id, num:0, identificador:"almacenes"},
+			success:function(data){
 
-	$(".module-body").empty();
-	$(".module-body").append('<form class="form-horizontal row-fluid">'+
-							 	'<div class="control-group ">'+
-									'<label class="control-label">No. Inventario</label>'+
-										'<div class="controls col-md-3">'+
-											'<div class="input-append">'+
-												'<input type="text" placeholder="NI-00006138"  >'+
-												'<input type="submit" class="btn btn-default" value="Buscar" />'+
+				var datos = eval('(' + data + ')');
+				
+				$(".module-head").empty();
+				$(".module-head").append('<h3>Cambio de almacen</h3>');
+
+				$(".module-body").empty();
+				$(".module-body").append('<form class="form-horizontal row-fluid">'+
+										 	'<div class="control-group" id="'+datos.id+'">'+ //utilizo el id de este div para guardar el id del registro que se va a modificar
+												'<label class="control-label">No. Inventario</label>'+
+													'<div class="controls col-md-3">'+
+														'<div class="input-append">'+
+															'<input type="text" id="no-inv" value="'+datos.no_invent+'"placeholder="NI-00006138"  >'+
+															'<input type="submit" class="btn btn-default" value="Buscar" />'+
+														'</div>'+
+													'</div>'+
+
+												'<br>'+
+												'<label class="control-label">Serie</label>'+
+													'<div class="controls col-md-3">'+
+														
+														'<input type="text" id="serie" value="'+datos.serie+'" disabled="true" >'+
+													'</div>'+
+
+												'<br>'+
+												'<label class="control-label">Articulo</label>'+
+													'<div class="controls col-md-3">'+
+														'<input type="text" id="articulo" value="'+datos.articulo+'" disabled="true" >'+
+													'</div>'+
+
+												'<br>'+
+												'<label class="control-label">Descripcion</label>'+
+													'<div class="controls col-md-3">'+
+														'<input type="text" id="nombre" value="'+datos.nombre+'">'+
+													'</div>'+
+
+												'<br>'+
+												'<label class="control-label">Ubicacion Actual</label>'+
+													'<div class="controls col-md-3">'+
+														'<select tabindex="1" id="almacen-origen" class="almacenes-list">'+
+															'<option value="'+datos.id_loc+'">'+datos.localiza+'</option>'+
+														'</select>'+
+													'</div>'+
+
+												
+												'<br>'+
+												'<label class="control-label">Nueva Ubicacion</label>'+
+													'<div class="controls col-md-3">'+
+														'<select tabindex="1" id="almacen-destino" class="almacenes-list">'+
+															'<option value="">Selecciona uno..</option>'+
+														'</select>'+
+													'</div>'+
+												
+												'<br>'+
+												'<br>'+
+
+												'<div class="msg"></div>'+
+
+												'<label class="control-label"></label>'+
+													'<div class="controls col-md-3">'+
+														'<input type="submit" id="guardar-cambo-almacen" class="btn btn-default" value="Cambiar" />'+
+													'</div>'+
+
+												'&nbsp'+
+												'<label class="control-label"></label>'+
+													'<div class="controls col-md-3">'+
+														'<input type="submit" class="btn btn-default" value="Limpiar" />'+
+													'</div>'+	
 											'</div>'+
-										'</div>'+
-
-									'<br>'+
-									'<label class="control-label">Serie</label>'+
-										'<div class="controls col-md-3">'+
-											
-											'<input type="text"  disabled="true" >'+
-										'</div>'+
-
-									'<br>'+
-									'<label class="control-label">Articulo</label>'+
-										'<div class="controls col-md-3">'+
-											'<input type="text" disabled="true" >'+
-										'</div>'+
-
-									'<br>'+
-									'<label class="control-label">Descripcion</label>'+
-										'<div class="controls col-md-3">'+
-											'<input type="text" >'+
-										'</div>'+
-
-									'<br>'+
-									'<label class="control-label">Ubicacion Actual</label>'+
-										'<div class="controls col-md-3">'+
-											'<select tabindex="1" class="col-md-3">'+
-												'<option value="">Selecciona uno..</option>'+
-												'<option value="Category 1">First Row</option>'+
-											'</select>'+
-										'</div>'+
-
-									
-									'<br>'+
-									'<label class="control-label">Nueva Ubicacion</label>'+
-										'<div class="controls col-md-3">'+
-											'<select tabindex="1" class="col-md-3">'+
-												'<option value="">Selecciona uno..</option>'+
-												'<option value="Category 1">First Row</option>'+
-											'</select>'+
-										'</div>'+
-
-									'<br>'+
-									'<br>'+
-									'<label class="control-label"></label>'+
-										'<div class="controls col-md-3">'+
-											'<input type="submit" class="btn btn-default" value="Buscar" />'+
-										'</div>'+
-
-									'&nbsp'+
-									'<label class="control-label"></label>'+
-										'<div class="controls col-md-3">'+
-											'<input type="submit" class="btn btn-default" value="Limpiar" />'+
-										'</div>'+	
-								'</div>'+
-							 '</form>');
+										 '</form>');
+				
+				for (var i = 0; i < datos[0].length; i++) {
+					$(".almacenes-list").append('<option name="'+datos[0][i].modulo+'" value="'+datos[0][i].id_clave+'">'+datos[0][i].descrip+'</option>');						
+				};
+															
+				
+			}
+		});
 
 });
