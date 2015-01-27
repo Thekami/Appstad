@@ -342,7 +342,6 @@ $(document).on('click', '#guardar-cambo-almacen', function(event){
 	//console.log("" +no_invent+ " -- " +serie+ " -- " +articulo+ " -- " +nombre+ " -- " +almacen1+"");
 
 });
-
 $(document).on('click', '.move', function(event) {
 	var id = this.id;
 
@@ -365,7 +364,7 @@ $(document).on('click', '.move', function(event) {
 													'<div class="controls col-md-3">'+
 														'<div class="input-append">'+
 															'<input type="text" id="no-inv" value="'+datos.no_invent+'"placeholder="NI-00006138"  >'+
-															'<input type="submit" id="buscar-no-inv" class="btn btn-default" value="Buscar" />'+
+															'<input type="submit" class="btn btn-default" value="Buscar" />'+
 														'</div>'+
 													'</div>'+
 
@@ -431,27 +430,4 @@ $(document).on('click', '.move', function(event) {
 			}
 		});
 
-});
-
-$(document).on('click', '#buscar-no-inv', function(event) {
-
-	var no_invent = $("#no-inv").val();
-	
-	$.ajax({
-		url: 'ajax/buscar-no-inv',
-		type: 'post',
-		datatype: 'json',
-		data:{no_invent:no_invent},
-		success:function(data){
-
-			var datos = eval('(' + data + ')');
-
-			$("#serie").val(datos[0].serie);
-			$("#articulo").val(datos[0].articulo);
-			$("#nombre").val(datos[0].nombre);
-			$("#almacen-origen").val(datos[0].id_loc);
-			/*var almacenOrigen = $("#almacen-origen").children();
-			console.log(almacenOrigen);*/
-		}
-	});
 });
