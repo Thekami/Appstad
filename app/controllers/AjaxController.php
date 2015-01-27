@@ -156,6 +156,17 @@ Class AjaxController extends BaseController {
 
     }
 
+
+    public function post_buscar_no_inv(){
+        $no_invent = Input::get("no_invent");
+
+        $consulta = Existencias::where("no_invent","=",$no_invent)
+                                ->get(array("no_invent", "serie", "articulo",
+                                            "nombre" ,"localiza", "id_loc", "id"));
+
+        echo $consulta;
+    }
+
 }
 
 ?>
