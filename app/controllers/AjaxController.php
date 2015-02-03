@@ -43,7 +43,7 @@ Class AjaxController extends BaseController {
            //toma 20 registros comenzando desde el primero.
         }
 
-// este codifgo carga la tabla de existencias de un solo almacen en espesifico
+   // este codifgo carga la tabla de existencias de un solo almacen en espesifico
         if ($identificador == "almacenes") {
             $count = Existencias::where('id_loc','=',$id)->count(); //cuento los registros existentes para el almacen que quiero cargar
                                                                     //mediante el id de localizacion de dicho almacen
@@ -169,6 +169,62 @@ Class AjaxController extends BaseController {
                                             "nombre" ,"localiza", "id_loc", "id"));
 
         echo $consulta; //envio la consulta de regreso
+    }
+
+    public function get_altas_dom(){
+
+        $GrupoExist[] = Gruposexistencias::select('grupo', 'descrip')->get();
+        $Almacenes = Almacenes::select('almacen', 'nombre')->get();
+        $Provedor = Provedores::select('NUM_PROV', 'NOM_PROV')->get();
+
+        array_push($GrupoExist, $Almacenes);
+        array_push($GrupoExist, $Provedor);
+        echo json_encode($GrupoExist);
+    }
+
+
+    public function get_option_change(){
+
+        $identificador = Input::get('option_change');
+
+        switch ($identificador) {
+            case 'almacen':
+                # se activa kiosko
+                $datos[] = Kioskosbcs::select('id_clave', 'descrip')->get();
+                break;
+
+            case 'gp_arti':
+                # se activa nombre articulo
+                $almacen = Input::get('almacen');
+                $grupo = Input::get('grupo');
+                $datos[] = Catarticulos::select('NUM_ARTI', 'DESCRIP')
+                            ->where(array('ALMACEN'=>$almacen, 'GRUPO'=>$grupo))
+                            ->get();
+                break;
+            
+            case 'kiosko':
+                # se activa modelo
+                $id_clave = Input::get('id_clave');
+                $datos[] = Kioskosbcs::where('id_clave','=',$id_clave)->get('modelo');
+                break;
+            
+            case 'modelo':
+                # se activa modulo
+                $id_clave = Input::get('id_clave');
+                $modelo = Input::get('modelo');
+                $datos[] = Kioskosbcs::select('modulo')
+                            ->where(array('id_clave'=>$id_clave, 'modelo'=>$modelo))
+                            ->get();
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+
+        //array_push($Narti, $);
+        echo json_encode($datos);
     }
 
 

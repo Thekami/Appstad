@@ -12,6 +12,9 @@
 */
 Route::controller('ajax', 'AjaxController'); //Controlador que maneja las llamadas AJAX
 
+Route::get('/altas', function(){
+	return View::make('formAlta');
+});
 
 Route::get('/', function()
 {

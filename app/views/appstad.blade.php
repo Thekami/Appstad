@@ -17,7 +17,7 @@ AppstadAlmacen
                         Equipo 
                     </a>
                     <ul id="MenuAltas" class="collapse unstyled">
-                        <li><a href="#" class="">Altas </a></li>
+                        <li><a href="#" id="altas-dom" class="">Altas </a></li>
                         <li><a href="#" id="solo-dom" class="move">Cambio de Almacen </a></li>
                         <li><a href="#" class="">Historial de Cambios </a></li>
                     </ul>
