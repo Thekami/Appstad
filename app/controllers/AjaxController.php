@@ -231,15 +231,24 @@ Class AjaxController extends BaseController {
     public function post_guardar_altas(){
         $datos_form = Input::get("datos_form");
 
+        $consulta[] = Catarticulos::select('DESCRIP')
+                            ->where(array('NUM_ARTI'=> $datos_form[0]["articulo"],
+                                          'GRUPO'=> $datos_form[0]["grupo"]))
+                            ->get();
+
+        echo $consulta[0][0]["DESCRIP"];
+
         $add = new Existencias;
         $add->almacen = $datos_form[0]["almacen"];
-        $add->grupo = $datos_form[0]["gp_arti"];
-        $add->articulo = $datos_form[0]["nom-arti"];
-        $add->nombre = $datos_form[0]["folio"];
-        $add-> = $datos_form[0]["no-inv"];
-        $add-> = $datos_form[0]["fecha"];
-        $add-> = $datos_form[0]["clave"];
-        $add-> = $datos_form[0]["factura"];
+        $add->grupo = $datos_form[0]["grupo"];
+        $add->articulo = $datos_form[0]["articulo"];
+        $add->nombre = $consulta[0][0]["DESCRIP"];
+        $add->folio = $datos_form[0]["folio"];
+        $add->no_invent = $datos_form[0]["no-inv"];
+        $add->fecha = $datos_form[0]["fecha"];
+        $add->clave = $datos_form[0]["clave"];
+        $add->factura = $datos_form[0]["factura"];
+        $add->save();
     }
 
 

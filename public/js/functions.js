@@ -481,8 +481,9 @@ $(document).on('click', '#altas-dom', function(event){
 
 			form_altas(id_pag_form, datos);
 
+
 		}
-	})
+	});
 
 });
 
@@ -780,7 +781,7 @@ $(document).on('click', '#guardar-form', function(event){
 		switch(id_pag_form){
 			case 1:
 				form = {"almacen":$("#almacen").val(), "grupo":$("#gp-arti").val(), 
-					"nombe":$("#nom-arti").val(), "folio":$("#folio").val(), 
+					"articulo":$("#nom-arti").val(), "folio":$("#folio").val(), 
 					"no-inv":$("#no-inv").val(), "fecha":$("#fecha").val(), 
 					"clave":$("#clave").val(), "factura":$("#factura").val()};
 				break;
@@ -819,13 +820,13 @@ $(document).on('click', '#guardar-form', function(event){
 					datatype:'json',
 					data: {datos_form:datos_form},
 					success:function(data){
+						
+						/*var datos = eval('(' + data + ')');
 
-						var datos = eval('(' + data + ')');
-
-						console.log(datos);
+						console.log(datos);*/
 
 					}
-				})
+				});
 		};
 
 		id_pag_form++;
@@ -852,7 +853,7 @@ $(document).on('change', '#almacen', function(event){
 			infoKiosko = datos;
 
 		}
-	})
+	});
 });
 
 $(document).on('change', '#gp-arti', function(event){
@@ -874,8 +875,10 @@ $(document).on('change', '#gp-arti', function(event){
 			console.log(datos[0]);
 
 			for (var i = 0; i<datos[0].length; i++) {
-				$("#nom-arti").append('<option name="" value="'+datos[0][i].NUM_ARTI+'">'+datos[0][i].DESCRIP+'</option>');
+				$("#nom-arti").append('<option name="'+datos[0][i].DESCRIP+'" value="'+datos[0][i].NUM_ARTI+'">'+datos[0][i].DESCRIP+'</option>');
 			}
+
+			
 
 		}
 	});
@@ -897,7 +900,7 @@ $(document).on('change', '#kiosko', function(event){
 			$("#modelo").val(""+datos[0][0].modelo+"");
 			$("#modelo").trigger("change");
 		}
-	})
+	});
 });
 
 $(document).on('change', '#modelo', function(event){
@@ -921,5 +924,7 @@ $(document).on('change', '#modelo', function(event){
 			}
 
 		}
-	})
+	});
 });
+
+
