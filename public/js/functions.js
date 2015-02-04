@@ -473,172 +473,13 @@ $(document).on('click', '#altas-dom', function(event){
 		success:function(data){
 
 			var datos = eval('(' + data + ')');
-			console.log(datos);
-			/*console.log("----------------------------------");
-			console.log(datos[0][0]);
-			console.log(datos[0][1]);
-			console.log("----------------------------------");
-			console.log(datos[1][0]);
-			console.log(datos[1][1]);*/
-
+		
 			$(".module-head").empty();
 			$(".module-head").append('<h3>Registro de dispositivos</h3>');
 
 			$(".module-body").empty();
 
 			form_altas(id_pag_form, datos);
-			/*$(".module-body").append('<form class="form-horizontal row-fluid">'+
-										'<div class="control-group">'+
-											
-											'<label class="control-label">Almacen</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="almacen" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Grupo Articulo</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="gp-arti" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Nombre Articulo</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="nom-arti" class="span6">'+
-														'<option value="">Esperando..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-			   								'<label class="control-label">Folio</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="folio" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-											
-											'<label class="control-label">Numero de Inventario</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="no-inv" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Fecha</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="fecha" class="span6" value="" placeholder="DD-MM-YY">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Clave</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="clave" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Factura</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="factura" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-											
-											'<label class="control-label">Unidad Medida</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="uni-med" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Costo</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="costo" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Orden Compra</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="orden-comp" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Unidad Entrada</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="uni-ent" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Cargos</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="cargos" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Unidad Salida</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="uni-sal" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Abonos</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="abonos" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Proveedor</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="proveedor" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Tipo de Uso</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="t-us" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Serie</label>'+
-												'<div class="controls">'+
-													'<input type="text" id="serie" class="span6" value="">'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Kiosko</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="kiosko" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Modelo</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="modelo" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<label class="control-label">Modulo</label>'+
-												'<div class="controls">'+
-													'<select tabindex="1" id="modulo" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
-												'</div>'+
-											'<br>'+
-
-											'<div class="msg"></div>'+
-
-											'<label class="control-label"></label>'+
-												'<div class="controls">'+
-													'<input type="submit" id="guardar-altas" class="btn btn-default span6" value="Cambiar" />'+
-												'</div>'+
-										'</div>'+
-								 	 '</form>');*/
-			//load("/appstad/public/altas");
 
 		}
 	})
@@ -820,9 +661,7 @@ function form_altas(id_pag_form, datos){
 
 											'<label class="control-label">Modelo</label>'+
 												'<div class="controls">'+
-													'<select tabindex="1" id="modelo" class="span6">'+
-														'<option value="">Selecciona uno..</option>'+
-													'</select>'+
+													'<input type="text" id="modelo" class="span6" value="" disabled>'+
 												'</div>'+
 											'<br>'+
 
@@ -930,7 +769,12 @@ function form_altas(id_pag_form, datos){
 
 $(document).on('click', '#guardar-form', function(event){
 
-	var confirmar = confirm("¿Estas seguro?");
+	if (id_pag_form == 4) {
+		var confirmar = confirm("El total de la informacion proporcionada se guardara, ¿Esta usted seguro? ");
+	}else{
+		var confirmar = confirm("¿Esta usted seguro? Los datos se guardaran y no podran ser modificados posteriormente");
+	}
+	
 	if(confirmar){
 
 		switch(id_pag_form){
@@ -960,17 +804,33 @@ $(document).on('click', '#guardar-form', function(event){
 					"mnom-prov":$("#mnom-prov").val(), "id-fol-r":$("#id-fol-r").val(), 
 					"fecha-ope":$("#fecha-ope").val(), "fecha-fac":$("#fecha-fac").val(), 
 					"fecha-cam":$("#fecha-cam").val(), "fecha-mant":$("#fecha-mant").val()};
-				break;
-
-			case 5:
 				id_pag_form = 0;
-				//alert(datos_form);
+
+				//alert(datos_form[0].almacen + " --- " + datos_form[1].costo);
 				break;
 		}
 
 		datos_form.push(form);
+
+		if (id_pag_form == 0){
+			$.ajax({
+					url:'ajax/guardar-altas',
+					type:'post',
+					datatype:'json',
+					data: {datos_form:datos_form},
+					success:function(data){
+
+						var datos = eval('(' + data + ')');
+
+						console.log(datos);
+
+					}
+				})
+		};
+
 		id_pag_form++;
 		$("#altas-dom").trigger("click"); //sumula el evento click del objeto seleccionado
+		
 		//console.log(datos_form[0].almacen); 
 
 	} 
@@ -1000,14 +860,18 @@ $(document).on('change', '#gp-arti', function(event){
 	var almacen = $("#almacen").val();
 	var gp_arti = $("#gp-arti").val();
 
+	$("#nom-arti").empty();
+
 	$.ajax({
 		url: 'ajax/option-change',
 		type: 'get',
 		datatype: 'json',
 		data: {option_change:"gp_arti", almacen:almacen, gp_arti:gp_arti},
 		success:function(data){
-
+			
 			var datos = eval('(' + data + ')');
+
+			console.log(datos[0]);
 
 			for (var i = 0; i<datos[0].length; i++) {
 				$("#nom-arti").append('<option name="" value="'+datos[0][i].NUM_ARTI+'">'+datos[0][i].DESCRIP+'</option>');
@@ -1017,29 +881,44 @@ $(document).on('change', '#gp-arti', function(event){
 	});
 });
 
-/*$(document).on('change', '#kiosko', function(event){
+$(document).on('change', '#kiosko', function(event){
 	
-	var id_clave = $("#")
+	var id_clave = $("#kiosko").val();
 
 	$.ajax({
 		url: 'ajax/option-change',
 		type: 'get',
 		datatype: 'json',
-		data: {option_change:"kiosko"},
+		data: {option_change:"kiosko", id_clave:id_clave},
 		success:function(data){
+			
+			var datos = eval('(' + data + ')');
 
+			$("#modelo").val(""+datos[0][0].modelo+"");
+			$("#modelo").trigger("change");
 		}
 	})
-});*/
+});
 
 $(document).on('change', '#modelo', function(event){
-	
+
+	var modelo = $("#modelo").val();
+	var id_clave = $("#kiosko").val();
+
+	$("#modulo").empty();
+
 	$.ajax({
 		url: 'ajax/option-change',
 		type: 'get',
 		datatype: 'json',
-		data: {option_change:"modelo"},
+		data: {option_change:"modelo", modelo:modelo, id_clave:id_clave},
 		success:function(data){
+			
+			var datos = eval('(' + data + ')');
+
+			for (var i = 0; i<datos[0].length; i++) {
+				$("#modulo").append('<option name="" value="'+datos[0][i].modulo+'">'+datos[0][i].modulo+'</option>');
+			}
 
 		}
 	})

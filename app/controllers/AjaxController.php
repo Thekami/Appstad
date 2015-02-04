@@ -196,7 +196,7 @@ Class AjaxController extends BaseController {
             case 'gp_arti':
                 # se activa nombre articulo
                 $almacen = Input::get('almacen');
-                $grupo = Input::get('grupo');
+                $grupo = Input::get('gp_arti');
                 $datos[] = Catarticulos::select('NUM_ARTI', 'DESCRIP')
                             ->where(array('ALMACEN'=>$almacen, 'GRUPO'=>$grupo))
                             ->get();
@@ -205,7 +205,8 @@ Class AjaxController extends BaseController {
             case 'kiosko':
                 # se activa modelo
                 $id_clave = Input::get('id_clave');
-                $datos[] = Kioskosbcs::where('id_clave','=',$id_clave)->get('modelo');
+                $datos[] = Kioskosbcs::select('modelo')->where('id_clave','=',$id_clave)->get();
+                //where('id_clave','=',$id_clave)->get('modelo');
                 break;
             
             case 'modelo':
@@ -225,6 +226,20 @@ Class AjaxController extends BaseController {
 
         //array_push($Narti, $);
         echo json_encode($datos);
+    }
+
+    public function post_guardar_altas(){
+        $datos_form = Input::get("datos_form");
+
+        $add = new Existencias;
+        $add->almacen = $datos_form[0]["almacen"];
+        $add->grupo = $datos_form[0]["gp_arti"];
+        $add->articulo = $datos_form[0]["nom-arti"];
+        $add->nombre = $datos_form[0]["folio"];
+        $add-> = $datos_form[0]["no-inv"];
+        $add-> = $datos_form[0]["fecha"];
+        $add-> = $datos_form[0]["clave"];
+        $add-> = $datos_form[0]["factura"];
     }
 
 
