@@ -1,0 +1,40 @@
+        $consulta_kiosko[] = Kioskosbcs::select('descrip')
+                            ->where('id_clave','=',$datos_form[2]["kiosko"])
+                            ->get();
+
+        $add = new Existencias;
+        $add->almacen = $datos_form[0]["almacen"];
+        $add->grupo = $datos_form[0]["grupo"];
+        $add->articulo = $datos_form[0]["articulo"];
+        $add->nombre = $consulta_articulo[0][0]["DESCRIP"];
+        $add->folio = $datos_form[0]["folio"];
+        $add->no_invent = $datos_form[0]["no-inv"];
+        $add->fecha = $datos_form[0]["fecha"];
+        $add->clave = $datos_form[0]["clave"];
+        $add->factura = $datos_form[0]["factura"];
+        $add->uni_med = $datos_form[1]["uni-med"];
+        $add->costo_unit = $datos_form[1]["costo"];
+        $add->uni_ent = $datos_form[1]["uni-ent"];
+        $add->cargos = $datos_form[1]["cargos"];
+        $add->uni_sal = $datos_form[1]["uni-sal"];
+        $add->abonos = $datos_form[1]["abonos"];
+        $add->provee = $datos_form[1]["proveedor"];
+        $add->tipo_uso = $datos_form[1]["t-us"];
+        $add->serie = $datos_form[2]["serie"];
+        $add->id_loc = $datos_form[2]["kiosko"];
+        $add->localiza = $consulta_kiosko[0][0]["descrip"];
+        $add->orden_comp = $datos_form[2]["orden-comp"];
+        $add->foli_cam = $datos_form[2]["folio-cam"];
+        $add->resguardo = $datos_form[2]["resguardo"];
+        $add->fecha_res = $datos_form[2]["fecha-resg"];
+        $add->resg_folio = $datos_form[2]["resg_folio"];
+        $add->fin_garant = $datos_form[4]["fin-garantia"];
+        $add->nom_prov = $datos_form[3]["nom-prov"];
+        $add->id_folio_r = $datos_form[3]["id-fol-r"];
+        $add->fecha_ope = $datos_form[3]["fecha-ope"];
+        $add->fecha_fac = $datos_form[3]["fecha-fac"];
+        $add->fecha_cam = $datos_form[3]["fecha-cam"];
+        $add->fecha_mant = $datos_form[3]["fecha-mant"];
+        $add->id_modelo = $datos_form[3]["modelo"];
+        $add->id_modulo = $datos_form[3]["modulo"];
+        $add->save();

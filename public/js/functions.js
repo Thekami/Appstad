@@ -802,7 +802,7 @@ $(document).on('click', '#guardar-form', function(event){
 
 			case 4:
 				form = {"resg-folio":$("#resg-folio").val(), "fin-garantia":$("#fin-garantia").val(), 
-					"mnom-prov":$("#mnom-prov").val(), "id-fol-r":$("#id-fol-r").val(), 
+					"nom-prov":$("#mnom-prov").val(), "id-fol-r":$("#id-fol-r").val(), 
 					"fecha-ope":$("#fecha-ope").val(), "fecha-fac":$("#fecha-fac").val(), 
 					"fecha-cam":$("#fecha-cam").val(), "fecha-mant":$("#fecha-mant").val()};
 				id_pag_form = 0;
@@ -820,7 +820,7 @@ $(document).on('click', '#guardar-form', function(event){
 					datatype:'json',
 					data: {datos_form:datos_form},
 					success:function(data){
-						
+						console.log(data);
 						/*var datos = eval('(' + data + ')');
 
 						console.log(datos);*/
