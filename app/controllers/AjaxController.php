@@ -6,13 +6,13 @@ Class AjaxController extends BaseController {
 		$username = Input::get('username');   //obtenemos el username enviado por el form
         $password = Input::get('password');   //obtenemos el password enviado por el form
         //$password = Hash::make($password);  // <-- eso se descomenta para mandar el alert con una password hasheada
-        $response = false;
-        // Realizamos la autenticación
-        if (Auth::attempt(['username' => $username, 'password' => $password]))
-        {
-            //return Redirect::to('/hidden');
-            $response = true;
-        }
+        $response = false;                                                      // ___ esto
+        // Realizamos la autenticación                                          //    | se debe
+        if (Auth::attempt(['username' => $username, 'password' => $password]))  //    | comentar
+        {                                                                       //    | para mandar
+            //return Redirect::to('/hidden');                                   //    | la password
+            $response = true;                                                   //    | hasheada en 
+        }                                                                       // ___| un alert
 
         echo json_encode($response); // <-- esto se comenta para mandar el alert con una password hasheada
         //echo json_encode($password);  // <-- eso se descomenta para mandar el alert con una password hasheada

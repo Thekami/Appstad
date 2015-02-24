@@ -74,7 +74,7 @@ AppstadAlmacen
 		<div class="module">
             <div class="module-head">
                 {{Form::open(array("method" => "POST", "class"=>"input-append"))}}
-                {{ Form::text('username','',  array('placeholder'=>'Buscar', 'id'=>'findTxt')) }}
+                {{Form::text('username','',  array('placeholder'=>'Buscar', 'id'=>'findTxt')) }}
                 {{Form::submit('Go', array('class' => 'btn btn-default','id'=>'findBtn' ))}}
                 {{form::close()}}
             </div>
