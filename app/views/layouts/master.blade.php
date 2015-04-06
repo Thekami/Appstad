@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('css/bootstrap-responsive.min.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('css/theme.css')}}">
-	<link rel="stylesheet" href="{{URL::asset('ss/font-awesome.css')}}">
+	<link rel="stylesheet" href="{{URL::asset('css/font-awesome.css')}}">
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 
 </head>
@@ -61,7 +61,7 @@
 	@yield('scripts')
 
 	<script src="{{URL::asset('js/jquery-1.11.1.min.js')}}"></script>
-	<script src="{{URL::asset('js/functions.js')}}"></script>
+	<script src="{{URL::asset('js/CargaInicial.js')}}"></script>
 	
 	<script src="{{URL::asset('js/jquery-ui-1.10.1.custom.min.js')}}"></script>
 	<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>

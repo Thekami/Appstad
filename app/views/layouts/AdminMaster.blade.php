@@ -62,7 +62,9 @@
 	@yield('scripts')
 
 	<script src="{{URL::asset('js/jquery-1.11.1.min.js')}}"></script>
-	<script src="{{URL::asset('js/functions.js')}}"></script>
+	<script src="{{URL::asset('js/CargaInicial.js')}}"></script>
+	<script src="{{URL::asset('js/CambioAlmacen.js')}}"></script>
+	<script src="{{URL::asset('js/AltasItems.js')}}"></script>
 	
 	<script src="{{URL::asset('js/jquery-ui-1.10.1.custom.min.js')}}"></script>
 	<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
